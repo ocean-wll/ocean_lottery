@@ -1,7 +1,11 @@
 server:
   port: 8081
 
+
+
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     username: root
     password:
@@ -18,10 +22,10 @@ dubbo:
     name: ocean_lottery
     version: 1.0.0
   registry:
-    #    address: zookeeper://127.0.0.1:2181
-    address: multicast://224.5.6.8:1234
+    address: zookeeper://127.0.0.1:2181
+  #    address: multicast://224.5.6.8:1234
   protocol:
     name: dubbo
     port: 20880
   scan:
-    base-packages: cn.itedus.lottery.rpc
+    base-packages: pers.ocean.lottery.rpc
