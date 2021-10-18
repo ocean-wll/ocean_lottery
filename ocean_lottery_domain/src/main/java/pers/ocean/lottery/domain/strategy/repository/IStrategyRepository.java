@@ -1,5 +1,7 @@
 package pers.ocean.lottery.domain.strategy.repository;
 
+import java.util.List;
+
 import pers.ocean.lottery.domain.strategy.model.aggregates.StrategyRich;
 import pers.ocean.lottery.infrastructure.po.Award;
 
@@ -25,4 +27,21 @@ public interface IStrategyRepository {
      * @return Award对象
      */
     Award queryAwardInfo(String awardId);
+
+    /**
+     * 查询没有库存的奖品列表
+     *
+     * @param strategyId 策略id
+     * @return AwardId集合
+     */
+    List<String> queryNoStockStrategyAwardList(Long strategyId);
+
+    /**
+     * 扣减库存
+     *
+     * @param strategyId 策略id
+     * @param awardId    奖品id
+     * @return 扣减结果
+     */
+    Boolean deductStock(Long strategyId, String awardId);
 }

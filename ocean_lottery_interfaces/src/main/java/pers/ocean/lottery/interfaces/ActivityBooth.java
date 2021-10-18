@@ -4,10 +4,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.RpcContext;
 
-import pers.ocean.lottery.common.ResponseCode;
+import org.apache.dubbo.config.annotation.DubboService;
+import pers.ocean.lottery.common.Constants.ResponseCode;
 import pers.ocean.lottery.common.Result;
 import pers.ocean.lottery.infrastructure.dao.IActivityDao;
 import pers.ocean.lottery.rpc.IActivityBooth;
@@ -20,7 +20,7 @@ import pers.ocean.lottery.rpc.res.ActivityRes;
  * @Author ocean_wll
  * @Date 2021/8/26 6:44 下午
  */
-@Service
+@DubboService
 public class ActivityBooth implements IActivityBooth {
 
     @Resource

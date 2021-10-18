@@ -47,4 +47,12 @@ public class StrategyDetail {
      * 修改时间
      */
     private Date updateTime;
+
+    public StrategyDetail() {
+    }
+
+    public StrategyDetail(Long strategyId, String awardId) {
+        this.strategyId = strategyId;
+        this.awardId = awardId;
+    }
 }

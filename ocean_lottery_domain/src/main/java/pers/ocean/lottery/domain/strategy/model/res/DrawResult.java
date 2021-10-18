@@ -3,6 +3,8 @@ package pers.ocean.lottery.domain.strategy.model.res;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pers.ocean.lottery.common.Constants.DrawState;
+import pers.ocean.lottery.domain.strategy.model.vo.DrawAwardInfo;
 
 /**
  * @Description
@@ -10,14 +12,12 @@ import lombok.NoArgsConstructor;
  * @Date 2021/9/22 2:49 下午
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DrawResult {
 
     /**
      * 用户id
      */
-    private String uid;
+    private String uId;
 
     /**
      * 策略id
@@ -25,12 +25,30 @@ public class DrawResult {
     private Long strategyId;
 
     /**
-     * 奖品id
+     * 中奖状态
+     *
+     * @see pers.ocean.lottery.common.Constants.DrawState
      */
-    private String rewardId;
+    private Integer drawState = DrawState.FAIL.getCode();
 
     /**
-     * 奖品名称
+     * 中奖奖品信息
      */
-    private String awardName;
+    private DrawAwardInfo drawAwardInfo;
+
+    public DrawResult() {
+    }
+
+    public DrawResult(String uId, Long strategyId, Integer drawState) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+        this.drawState = drawState;
+    }
+
+    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardInfo drawAwardInfo) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+        this.drawState = drawState;
+        this.drawAwardInfo = drawAwardInfo;
+    }
 }

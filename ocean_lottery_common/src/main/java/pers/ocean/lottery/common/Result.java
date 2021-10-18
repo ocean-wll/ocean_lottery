@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import pers.ocean.lottery.common.Constants.ResponseCode;
 
 /**
  * @Description

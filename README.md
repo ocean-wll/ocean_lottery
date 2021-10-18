@@ -296,4 +296,7 @@ create table user_strategy_export_004
     updateTime   timestamp null
 ) comment '用户策略计算结果表';
 
+alter table lottery.strategy_detail add awardSurplusCount int default 0 null comment '奖品剩余库存';
+
+
 ```
