@@ -20,7 +20,17 @@ public class DrawAwardInfo {
     private String awardId;
 
     /**
+     * 奖品类型
+     */
+    private Integer awardType;
+
+    /**
      * 奖品名称
      */
     private String awardName;
+
+    /**
+     * 奖品内容
+     */
+    private String awardContent;
 }

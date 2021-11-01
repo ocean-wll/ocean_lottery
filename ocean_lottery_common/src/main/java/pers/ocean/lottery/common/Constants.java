@@ -71,4 +71,59 @@ public class Constants {
         private Integer code;
         private String info;
     }
+
+    /**
+     * 发奖状态：0：等待发奖、1：发奖成功、2：发奖失败
+     */
+    @AllArgsConstructor
+    @Getter
+    public enum AwardState {
+        /**
+         * 等待发奖
+         */
+        WAIT(0, "等待发奖"),
+
+        /**
+         * 发奖成功
+         */
+        SUCCESS(1, "发奖成功"),
+
+        /**
+         * 发奖失败
+         */
+        FAILURE(2, "发奖失败");
+
+        private Integer code;
+        private String info;
+    }
+
+    /**
+     * 奖品类型 0：文字描述、1：兑换码、2：优惠券、3：实物奖品
+     */
+    @AllArgsConstructor
+    @Getter
+    public enum AwardType {
+        /**
+         * 文字描述
+         */
+        DESC(0, "文字描述"),
+
+        /**
+         * 兑换码
+         */
+        REDEMPTION_CODE_GOODS(1, "兑换码"),
+
+        /**
+         * 优惠券
+         */
+        COUPON_GOODS(2, "优惠券"),
+
+        /**
+         * 实物奖品
+         */
+        PHYSICAL_GOODS(3, "实物奖品");
+
+        private Integer code;
+        private String info;
+    }
 }

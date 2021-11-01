@@ -459,7 +459,7 @@ CREATE TABLE `strategy` (
 -- Records of strategy
 -- ----------------------------
 BEGIN;
-INSERT INTO `strategy` VALUES (1, 10001, 'test', 2, 1, NULL, '', '2021-09-25 08:15:52', '2021-09-25 08:15:52');
+INSERT INTO `strategy` VALUES (1, 10001, 'test', 1, 1, NULL, '', '2021-09-25 08:15:52', '2021-09-25 08:15:52');
 COMMIT;
 
 -- ----------------------------

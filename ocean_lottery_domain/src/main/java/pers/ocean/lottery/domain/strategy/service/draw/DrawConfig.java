@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import pers.ocean.lottery.common.Constants.StrategyMode;
 import pers.ocean.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 
 /**
@@ -16,7 +17,7 @@ import pers.ocean.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 public class DrawConfig {
 
     @Resource
-    private IDrawAlgorithm defaultRateRandomDrawAlgorithm;
+    private IDrawAlgorithm entiretyRateRandomDrawAlgorithm;
 
     @Resource
     private IDrawAlgorithm singleRateRandomDrawAlgorithm;
@@ -25,7 +26,7 @@ public class DrawConfig {
 
     @PostConstruct
     public void init() {
-        drawAlgorithmGroup.put(1, defaultRateRandomDrawAlgorithm);
-        drawAlgorithmGroup.put(2, singleRateRandomDrawAlgorithm);
+        drawAlgorithmGroup.put(StrategyMode.ENTIRETY.getCode(), entiretyRateRandomDrawAlgorithm);
+        drawAlgorithmGroup.put(StrategyMode.SINGLE.getCode(), singleRateRandomDrawAlgorithm);
     }
 }

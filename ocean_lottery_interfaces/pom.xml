@@ -77,6 +77,17 @@
             <artifactId>ocean_lottery_rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>pers.ocean</groupId>
+            <artifactId>ocean_lottery_domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
