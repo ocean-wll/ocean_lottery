@@ -1,5 +1,7 @@
 package pers.ocean.lottery.test;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import com.alibaba.fastjson.JSON;
@@ -10,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pers.ocean.lottery.common.Constants;
+import pers.ocean.lottery.common.Constants.Ids;
 import pers.ocean.lottery.domain.award.model.req.GoodsReq;
 import pers.ocean.lottery.domain.award.model.res.DistributionRes;
 import pers.ocean.lottery.domain.award.service.factory.DistributionGoodsFactory;
@@ -18,6 +21,7 @@ import pers.ocean.lottery.domain.strategy.model.req.DrawReq;
 import pers.ocean.lottery.domain.strategy.model.res.DrawResult;
 import pers.ocean.lottery.domain.strategy.model.vo.DrawAwardInfo;
 import pers.ocean.lottery.domain.strategy.service.draw.IDrawExec;
+import pers.ocean.lottery.domain.support.ids.IIdGenerator;
 import pers.ocean.lottery.infrastructure.dao.IActivityDao;
 
 /**
@@ -38,6 +42,17 @@ public class SpringRunnerTest {
 
     @Resource
     private DistributionGoodsFactory distributionGoodsFactory;
+
+    @Resource
+    private Map<Ids, IIdGenerator> idGeneratorMap;
+
+    @Test
+    public void test_ids() {
+        log.info("雪花算法策略，生成ID：{}", idGeneratorMap.get(Ids.SNOW_FLAKE).nextId());
+        log.info("日期算法策略，生成ID：{}", idGeneratorMap.get(Ids.SHORT_CODE).nextId());
+        log.info("随机算法策略，生成ID：{}", idGeneratorMap.get(Ids.RANDOM_NUMERIC).nextId());
+    }
+
 
     @Test
     public void test_award() {
