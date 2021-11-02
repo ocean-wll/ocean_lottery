@@ -22,11 +22,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <dependency>
-            <groupId>pers.ocean</groupId>
-            <artifactId>ocean_lottery_domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
     <build>

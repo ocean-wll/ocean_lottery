@@ -42,4 +42,11 @@
         WHERE activity_id = #{activityId}
     </select>
 
+    <update id="alterState" parameterType="pers.ocean.lottery.infrastructure.vo.AlterStateVO">
+        UPDATE activity
+        SET state = #{afterState}
+        WHERE activity_id = #{activityId}
+          AND state = #{beforeState}
+    </update>
+
 </mapper>

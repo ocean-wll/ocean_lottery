@@ -1,5 +1,7 @@
 package pers.ocean.lottery.infrastructure.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import pers.ocean.lottery.infrastructure.po.Award;
 
@@ -18,4 +20,11 @@ public interface IAwardDao {
      * @return Award对象
      */
     Award queryAwardInfo(String awardId);
+
+    /**
+     * 插入奖品配置
+     *
+     * @param list 奖品配置
+     */
+    void insertList(List<Award> list);
 }

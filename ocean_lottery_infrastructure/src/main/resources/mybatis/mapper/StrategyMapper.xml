@@ -29,4 +29,11 @@
         WHERE strategy_id = #{strategyId}
     </select>
 
+    <insert id="insert" parameterType="pers.ocean.lottery.infrastructure.po.Strategy">
+        INSERT INTO strategy(strategy_id, strategy_desc, strategy_mode, grant_type,
+                             grant_date, ext_info, create_time, update_time)
+        VALUES (#{strategyId}, #{strategyDesc}, #{strategyMode}, #{grantType},
+                #{grantDate}, #{extInfo}, NOW(), NOW())
+    </insert>
+
 </mapper>
