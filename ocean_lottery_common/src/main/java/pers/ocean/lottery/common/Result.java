@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import pers.ocean.lottery.common.Constants.ResponseCode;
 
 /**
  * @Description
@@ -20,15 +19,23 @@ public class Result implements Serializable {
     private String code;
     private String info;
 
-    public static Result buildResult(String code, String info) {
-        return new Result(code, info);
+    public static Result buildResult(Constants.ResponseCode code, String info) {
+        return new Result(code.getCode(), info);
+    }
+
+    public static Result buildResult(Constants.ResponseCode code, Constants.ResponseCode info) {
+        return new Result(code.getCode(), info.getInfo());
     }
 
     public static Result buildSuccessResult() {
-        return new Result(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo());
+        return new Result(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo());
     }
 
     public static Result buildErrorResult() {
-        return new Result(ResponseCode.UN_ERROR.getCode(), ResponseCode.UN_ERROR.getInfo());
+        return new Result(Constants.ResponseCode.UN_ERROR.getCode(), Constants.ResponseCode.UN_ERROR.getInfo());
+    }
+
+    public static Result buildErrorResult(String info) {
+        return new Result(Constants.ResponseCode.UN_ERROR.getCode(), info);
     }
 }
