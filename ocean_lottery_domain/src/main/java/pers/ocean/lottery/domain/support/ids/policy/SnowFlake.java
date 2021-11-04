@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import pers.ocean.lottery.domain.support.ids.IIdGenerator;
 
 /**
- * @description: hutool 工具包下的雪花算法，15位雪花算法推荐：https://github.com/yitter/idgenerator/blob/master/Java/source/src/main
+ * @Description hutool 工具包下的雪花算法，15位雪花算法推荐：https://github.com/yitter/idgenerator/blob/master/Java/source/src/main
  * /java/com/github/yitter/core/SnowWorkerM1.java
  * @Author ocean_wll
  * @Date 2021/11/2 4:24 下午
