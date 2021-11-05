@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.ocean.lottery.infrastructure.dao.IUserTakeActivityDao">
+
+    <insert id="insert" parameterType="pers.ocean.lottery.infrastructure.po.UserTakeActivity">
+        INSERT INTO user_take_activity(u_id, take_id, activity_id, activity_name, take_date,
+                                       take_count, uuid, create_time, update_time)
+        VALUES (#{userId}, #{takeId}, #{activityId}, #{activityName}, #{takeDate},
+                #{takeCount}, #{uuid}, now(), now());
+    </insert>
+</mapper>

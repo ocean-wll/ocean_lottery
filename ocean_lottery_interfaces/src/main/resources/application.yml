@@ -1,16 +1,39 @@
 server:
   port: 8081
 
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#  datasource:
+#    username: root
+#    password:
+#    url: jdbc:mysql://127.0.0.1:3306/lottery?useUnicode=true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 
-
-spring:
-  main:
-    allow-bean-definition-overriding: true
-  datasource:
-    username: root
-    password:
-    url: jdbc:mysql://127.0.0.1:3306/lottery?useUnicode=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
+# 多数据源路由配置
+mini-db-router:
+  jdbc:
+    datasource:
+      dbCount: 2
+      tbCount: 4
+      default: db00
+      routerKey: userId
+      list: db01,db02
+      db00:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/lottery?useUnicode=true
+        username: root
+        password:
+      db01:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/lottery_01?useUnicode=true
+        username: root
+        password:
+      db02:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/lottery_02?useUnicode=true
+        username: root
+        password:
 
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml

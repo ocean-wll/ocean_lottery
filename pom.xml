@@ -89,6 +89,11 @@
                 <version>5.7.15</version>
             </dependency>
 
+            <dependency>
+                <groupId>pers.ocean</groupId>
+                <artifactId>ocean-db-router-spring-boot-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
