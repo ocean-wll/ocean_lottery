@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Description
  * @Author ocean_wll
  * @Date 2021/8/26 5:30 下午
  */
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Result implements Serializable {

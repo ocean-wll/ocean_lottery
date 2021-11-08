@@ -3,6 +3,8 @@ package pers.ocean.lottery.domain.activity.repository;
 import java.util.List;
 
 import pers.ocean.lottery.common.Constants;
+import pers.ocean.lottery.domain.activity.model.req.PartakeReq;
+import pers.ocean.lottery.domain.activity.model.vo.ActivityBillVO;
 import pers.ocean.lottery.domain.activity.model.vo.ActivityVO;
 import pers.ocean.lottery.domain.activity.model.vo.AwardVO;
 import pers.ocean.lottery.domain.activity.model.vo.StrategyDetailVO;
@@ -53,4 +55,12 @@ public interface IActivityRepository {
      */
     boolean alterStatus(Long activityId, Enum<Constants.ActivityState> beforeState,
         Enum<Constants.ActivityState> afterState);
+
+    /**
+     * 查询活动账单信息【库存、状态、日期、个人参与次数】
+     *
+     * @param req 参与活动请求
+     * @return 活动账单
+     */
+    ActivityBillVO queryActivityBill(PartakeReq req);
 }
