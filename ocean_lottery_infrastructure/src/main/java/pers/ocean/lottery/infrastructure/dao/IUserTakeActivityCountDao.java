@@ -22,4 +22,19 @@ public interface IUserTakeActivityCountDao {
     UserTakeActivityCount queryByUserIdAndActivityId(@Param("userId") String userId,
         @Param("activityId") Long activityId);
 
+    /**
+     * 插入领取次数信息
+     *
+     * @param userTakeActivityCount 请求入参
+     */
+    void insert(UserTakeActivityCount userTakeActivityCount);
+
+    /**
+     * 更新领取次数信息
+     *
+     * @param userTakeActivityCount 请求入参
+     * @return 更新数量
+     */
+    Integer updateLeftCount(UserTakeActivityCount userTakeActivityCount);
+
 }

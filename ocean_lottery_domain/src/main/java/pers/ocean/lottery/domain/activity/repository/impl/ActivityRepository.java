@@ -106,7 +106,6 @@ public class ActivityRepository implements IActivityRepository {
             req.getUserId(), req.getActivityId());
 
         // 封装结果信息
-        // 封装结果信息
         ActivityBillVO activityBillVO = new ActivityBillVO();
         activityBillVO.setUserId(req.getUserId());
         activityBillVO.setActivityId(req.getActivityId());
@@ -117,8 +116,14 @@ public class ActivityRepository implements IActivityRepository {
         activityBillVO.setStockSurplusCount(activity.getStockSurplusCount());
         activityBillVO.setStrategyId(activity.getStrategyId());
         activityBillVO.setState(activity.getState());
-        activityBillVO.setUserTakeLeftCount(null == userTakeActivityCount ? null : userTakeActivityCount.getLeftCount());
+        activityBillVO.setUserTakeLeftCount(
+            null == userTakeActivityCount ? null : userTakeActivityCount.getLeftCount());
 
         return activityBillVO;
+    }
+
+    @Override
+    public Integer subtractionActivityStock(Long activityId) {
+        return activityDao.subtractionActivityStock(activityId);
     }
 }

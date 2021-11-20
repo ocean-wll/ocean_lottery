@@ -24,5 +24,18 @@
           AND activity_id = #{activityId}
     </select>
 
+    <insert id="insert" parameterType="pers.ocean.lottery.infrastructure.po.UserTakeActivityCount">
+        INSERT INTO user_take_activity_count(u_id, activity_id, total_count, left_count, create_time, update_time)
+        VALUES (#{userId}, #{activityId}, #{totalCount}, #{leftCount}, now(), now())
+    </insert>
+
+    <update id="updateLeftCount" parameterType="pers.ocean.lottery.infrastructure.po.UserTakeActivityCount">
+        UPDATE user_take_activity_count
+        SET left_count = left_count - 1
+        WHERE u_id = #{userId}
+          AND activity_id = #{activityId}
+          AND left_count > 0
+    </update>
+
 
 </mapper>

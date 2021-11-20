@@ -63,4 +63,12 @@ public interface IActivityRepository {
      * @return 活动账单
      */
     ActivityBillVO queryActivityBill(PartakeReq req);
+
+    /**
+     * 扣减活动库存
+     *
+     * @param activityId 活动ID
+     * @return 扣减结果
+     */
+    Integer subtractionActivityStock(Long activityId);
 }
