@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import pers.ocean.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import pers.ocean.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import pers.ocean.lottery.infrastructure.dao.IUserTakeActivityCountDao;
 import pers.ocean.lottery.infrastructure.dao.IUserTakeActivityDao;
@@ -62,5 +63,26 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         userTakeActivity.setUuid(uuid);
 
         userTakeActivityDao.insert(userTakeActivity);
+    }
+
+    @Override
+    public UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String userId) {
+        UserTakeActivity userTakeActivity = new UserTakeActivity();
+        userTakeActivity.setUserId(userId);
+        userTakeActivity.setActivityId(activityId);
+        UserTakeActivity noConsumedTakeActivityOrder = userTakeActivityDao.queryNoConsumedTakeActivityOrder(userTakeActivity);
+
+        // 未查询到符合的领取单，直接返回 NULL
+        if (null == noConsumedTakeActivityOrder) {
+            return null;
+        }
+
+        UserTakeActivityVO userTakeActivityVO = new UserTakeActivityVO();
+        userTakeActivityVO.setActivityId(noConsumedTakeActivityOrder.getActivityId());
+        userTakeActivityVO.setTakeId(noConsumedTakeActivityOrder.getTakeId());
+        userTakeActivityVO.setStrategyId(noConsumedTakeActivityOrder.getStrategyId());
+        userTakeActivityVO.setState(noConsumedTakeActivityOrder.getState());
+
+        return userTakeActivityVO;
     }
 }

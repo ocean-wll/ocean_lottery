@@ -9,10 +9,10 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 import pers.ocean.lottery.common.Constants;
-import pers.ocean.lottery.common.Constants.Ids;
 import pers.ocean.lottery.common.Result;
 import pers.ocean.lottery.domain.activity.model.req.PartakeReq;
 import pers.ocean.lottery.domain.activity.model.vo.ActivityBillVO;
+import pers.ocean.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import pers.ocean.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import pers.ocean.lottery.domain.activity.service.partake.BaseActivityPartake;
 import pers.ocean.lottery.domain.support.ids.IIdGenerator;
@@ -38,6 +38,11 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
 
     @Resource
     private IDBRouterStrategy dbRouter;
+
+    @Override
+    protected UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String userId) {
+        return userTakeActivityRepository.queryNoConsumedTakeActivityOrder(activityId, userId);
+    }
 
     @Override
     protected Result checkActivityBill(PartakeReq partake, ActivityBillVO bill) {
@@ -80,7 +85,7 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     }
 
     @Override
-    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill) {
+    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill, Long takeId) {
         try {
             dbRouter.doRouter(partake.getUserId());
             return transactionTemplate.execute(status -> {
@@ -98,7 +103,6 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                     }
 
                     // 插入领取活动信息
-                    Long takeId = idGeneratorMap.get(Ids.SNOW_FLAKE).nextId();
                     userTakeActivityRepository.takeActivity(bill.getActivityId(), bill.getActivityName(),
                         bill.getTakeCount(), bill.getUserTakeLeftCount(), partake.getUserId(), partake.getPartakeDate(),
                         takeId);

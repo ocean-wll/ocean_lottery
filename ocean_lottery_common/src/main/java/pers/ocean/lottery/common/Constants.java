@@ -199,4 +199,32 @@ public class Constants {
          */
         RANDOM_NUMERIC;
     }
+
+    /**
+     * 活动单使用状态 0未使用、1已使用
+     */
+    @AllArgsConstructor
+    @Getter
+    public enum TakeState {
+        NO_USED(0, "未使用"),
+        USED(1, "已使用"),
+        ;
+
+        private Integer code;
+        private String info;
+    }
+
+    /**
+     * 发奖状态 0初始、1完成、2失败
+     */
+    @AllArgsConstructor
+    @Getter
+    public enum GrantState {
+        INIT(0, "初始"),
+        COMPLETE(1, "完成"),
+        FAIL(2, "失败"),
+        ;
+        private Integer code;
+        private String info;
+    }
 }

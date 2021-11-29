@@ -2,6 +2,8 @@ package pers.ocean.lottery.domain.activity.repository;
 
 import java.util.Date;
 
+import pers.ocean.lottery.domain.activity.model.vo.UserTakeActivityVO;
+
 /**
  * @Description 用户参与活动仓储接口
  * @Author ocean_wll
@@ -36,4 +38,13 @@ public interface IUserTakeActivityRepository {
      */
     void takeActivity(Long activityId, String activityName, Integer takeCount, Integer userTakeLeftCount, String userId,
         Date takeDate, Long takeId);
+
+    /**
+     * 查询是否存在未执行抽奖领取活动单【user_take_activity 存在 state = 0，领取了但抽奖过程失败的，可以直接返回领取结果继续抽奖】
+     *
+     * @param activityId 活动ID
+     * @param userId     用户ID
+     * @return 领取单
+     */
+    UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String userId);
 }

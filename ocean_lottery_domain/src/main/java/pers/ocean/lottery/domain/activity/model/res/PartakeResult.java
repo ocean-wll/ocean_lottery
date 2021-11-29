@@ -16,9 +16,14 @@ public class PartakeResult extends Result {
     private static final long serialVersionUID = 5285876407131407596L;
 
     /**
-     * 策略Id
+     * 策略ID
      */
     private Long strategyId;
+
+    /**
+     * 活动领取ID
+     */
+    private Long takeId;
 
     public PartakeResult(String code, String info) {
         super(code, info);
