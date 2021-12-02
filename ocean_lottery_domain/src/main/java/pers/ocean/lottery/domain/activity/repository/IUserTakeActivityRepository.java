@@ -2,6 +2,7 @@ package pers.ocean.lottery.domain.activity.repository;
 
 import java.util.Date;
 
+import pers.ocean.lottery.domain.activity.model.vo.DrawOrderVO;
 import pers.ocean.lottery.domain.activity.model.vo.UserTakeActivityVO;
 
 /**
@@ -47,4 +48,21 @@ public interface IUserTakeActivityRepository {
      * @return 领取单
      */
     UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String userId);
+
+    /**
+     * 锁定活动领取记录
+     *
+     * @param userId     用户ID
+     * @param activityId 活动ID
+     * @param takeId     领取ID
+     * @return 更新结果
+     */
+    int lockTackActivity(String userId, Long activityId, Long takeId);
+
+    /**
+     * 保存抽奖信息
+     *
+     * @param drawOrder 中奖单
+     */
+    void saveUserStrategyExport(DrawOrderVO drawOrder);
 }

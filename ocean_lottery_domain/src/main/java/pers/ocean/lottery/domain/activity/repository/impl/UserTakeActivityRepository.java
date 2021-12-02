@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import pers.ocean.lottery.domain.activity.model.vo.DrawOrderVO;
 import pers.ocean.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import pers.ocean.lottery.domain.activity.repository.IUserTakeActivityRepository;
+import pers.ocean.lottery.infrastructure.dao.IUserStrategyExportDao;
 import pers.ocean.lottery.infrastructure.dao.IUserTakeActivityCountDao;
 import pers.ocean.lottery.infrastructure.dao.IUserTakeActivityDao;
+import pers.ocean.lottery.infrastructure.po.UserStrategyExport;
 import pers.ocean.lottery.infrastructure.po.UserTakeActivity;
 import pers.ocean.lottery.infrastructure.po.UserTakeActivityCount;
 
@@ -25,6 +28,9 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
 
     @Resource
     private IUserTakeActivityDao userTakeActivityDao;
+
+    @Resource
+    private IUserStrategyExportDao userStrategyExportDao;
 
     @Override
     public int subtractionLeftCount(Long activityId, String activityName, Integer takeCount, Integer userTakeLeftCount,
@@ -70,7 +76,8 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         UserTakeActivity userTakeActivity = new UserTakeActivity();
         userTakeActivity.setUserId(userId);
         userTakeActivity.setActivityId(activityId);
-        UserTakeActivity noConsumedTakeActivityOrder = userTakeActivityDao.queryNoConsumedTakeActivityOrder(userTakeActivity);
+        UserTakeActivity noConsumedTakeActivityOrder = userTakeActivityDao.queryNoConsumedTakeActivityOrder(
+            userTakeActivity);
 
         // 未查询到符合的领取单，直接返回 NULL
         if (null == noConsumedTakeActivityOrder) {
@@ -84,5 +91,34 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         userTakeActivityVO.setState(noConsumedTakeActivityOrder.getState());
 
         return userTakeActivityVO;
+    }
+
+    @Override
+    public int lockTackActivity(String userId, Long activityId, Long takeId) {
+        UserTakeActivity userTakeActivity = new UserTakeActivity();
+        userTakeActivity.setUserId(userId);
+        userTakeActivity.setActivityId(activityId);
+        userTakeActivity.setTakeId(takeId);
+        return userTakeActivityDao.lockTackActivity(userTakeActivity);
+    }
+
+    @Override
+    public void saveUserStrategyExport(DrawOrderVO drawOrder) {
+        UserStrategyExport userStrategyExport = new UserStrategyExport();
+        userStrategyExport.setUserId(drawOrder.getUserId());
+        userStrategyExport.setActivityId(drawOrder.getActivityId());
+        userStrategyExport.setOrderId(drawOrder.getOrderId());
+        userStrategyExport.setStrategyId(drawOrder.getStrategyId());
+        userStrategyExport.setStrategyMode(drawOrder.getStrategyMode());
+        userStrategyExport.setGrantType(drawOrder.getGrantType());
+        userStrategyExport.setGrantDate(drawOrder.getGrantDate());
+        userStrategyExport.setGrantState(drawOrder.getGrantState());
+        userStrategyExport.setAwardId(drawOrder.getAwardId());
+        userStrategyExport.setAwardType(drawOrder.getAwardType());
+        userStrategyExport.setAwardName(drawOrder.getAwardName());
+        userStrategyExport.setAwardContent(drawOrder.getAwardContent());
+        userStrategyExport.setUuid(String.valueOf(drawOrder.getOrderId()));
+
+        userStrategyExportDao.insert(userStrategyExport);
     }
 }

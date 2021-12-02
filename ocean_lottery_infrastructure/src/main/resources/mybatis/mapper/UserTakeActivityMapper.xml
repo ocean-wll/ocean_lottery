@@ -34,4 +34,12 @@
           AND state = 0
         ORDER BY id DESC LIMIT 1
     </select>
+
+    <update id="lockTackActivity" parameterType="pers.ocean.lottery.infrastructure.po.UserTakeActivity">
+        UPDATE user_take_activity
+        SET state = 1
+        WHERE u_id = #{userId}
+          AND activity_id = #{activityId}
+          AND state = 0
+    </update>
 </mapper>

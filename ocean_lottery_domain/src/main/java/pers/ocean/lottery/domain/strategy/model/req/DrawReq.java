@@ -1,6 +1,5 @@
 package pers.ocean.lottery.domain.strategy.model.req;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class DrawReq {
 
     /**
@@ -23,4 +21,20 @@ public class DrawReq {
      * 策略id
      */
     private Long strategyId;
+
+    /**
+     * 防重ID
+     */
+    private String uuid;
+
+    public DrawReq(String uId, Long strategyId) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+    }
+
+    public DrawReq(String uId, Long strategyId, String uuid) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+        this.uuid = uuid;
+    }
 }

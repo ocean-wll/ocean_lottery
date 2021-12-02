@@ -12,6 +12,7 @@ import pers.ocean.lottery.common.Constants;
 import pers.ocean.lottery.common.Result;
 import pers.ocean.lottery.domain.activity.model.req.PartakeReq;
 import pers.ocean.lottery.domain.activity.model.vo.ActivityBillVO;
+import pers.ocean.lottery.domain.activity.model.vo.DrawOrderVO;
 import pers.ocean.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import pers.ocean.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import pers.ocean.lottery.domain.activity.service.partake.BaseActivityPartake;
@@ -29,9 +30,6 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
 
     @Resource
     private IUserTakeActivityRepository userTakeActivityRepository;
-
-    @Resource
-    private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
 
     @Resource
     private TransactionTemplate transactionTemplate;
@@ -109,6 +107,37 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     log.error("领取活动，唯一索引冲突 activityId：{} uId：{}", partake.getActivityId(), partake.getUserId(), e);
+                    return Result.buildResult(Constants.ResponseCode.INDEX_DUP);
+                }
+                return Result.buildSuccessResult();
+            });
+        } finally {
+            dbRouter.clear();
+        }
+    }
+
+    @Override
+    public Result recordDrawOrder(DrawOrderVO drawOrderVO) {
+        try {
+            dbRouter.doRouter(drawOrderVO.getUserId());
+            return transactionTemplate.execute(status -> {
+                try {
+                    // 锁定活动领取记录
+                    int lockCount = userTakeActivityRepository.lockTackActivity(drawOrderVO.getUserId(),
+                        drawOrderVO.getActivityId(), drawOrderVO.getTakeId());
+                    if (0 == lockCount) {
+                        status.setRollbackOnly();
+                        log.error("记录中奖单，个人参与活动抽奖已消耗完 activityId：{} userId：{}", drawOrderVO.getActivityId(),
+                            drawOrderVO.getUserId());
+                        return Result.buildResult(Constants.ResponseCode.NO_UPDATE);
+                    }
+
+                    // 保存抽奖信息
+                    userTakeActivityRepository.saveUserStrategyExport(drawOrderVO);
+                } catch (DuplicateKeyException e) {
+                    status.setRollbackOnly();
+                    log.error("领取活动，唯一索引冲突 activityId：{} userId：{}", drawOrderVO.getActivityId(),
+                        drawOrderVO.getUserId(), e);
                     return Result.buildResult(Constants.ResponseCode.INDEX_DUP);
                 }
                 return Result.buildSuccessResult();
