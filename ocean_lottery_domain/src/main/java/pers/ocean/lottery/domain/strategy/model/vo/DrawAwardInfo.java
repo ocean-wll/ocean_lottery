@@ -2,9 +2,7 @@ package pers.ocean.lottery.domain.strategy.model.vo;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @Description
@@ -12,8 +10,6 @@ import lombok.NoArgsConstructor;
  * @Date 2021/10/18 8:07 下午
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DrawAwardInfo {
 
     /**
@@ -50,4 +46,14 @@ public class DrawAwardInfo {
      * 发奖时间
      */
     private Date grantDate;
+
+    public DrawAwardInfo() {
+    }
+
+    public DrawAwardInfo(String awardId, Integer awardType, String awardName, String awardContent) {
+        this.awardId = awardId;
+        this.awardType = awardType;
+        this.awardName = awardName;
+        this.awardContent = awardContent;
+    }
 }

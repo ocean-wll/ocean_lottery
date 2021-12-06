@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.ocean.lottery.infrastructure.dao.RuleTreeNodeDao">
+
+    <resultMap id="BASE_MAP" type="pers.ocean.lottery.infrastructure.po.RuleTreeNode">
+        <result column="id" property="id"/>
+        <result column="tree_id" property="treeId"/>
+        <result column="node_type" property="nodeType"/>
+        <result column="node_value" property="nodeValue"/>
+        <result column="rule_key" property="ruleKey"/>
+        <result column="rule_desc" property="ruleDesc"/>
+    </resultMap>
+
+    <select id="queryRuleTreeNodeList" resultMap="BASE_MAP">
+        SELECT id, tree_id, node_type, node_value, rule_key, rule_desc
+        FROM rule_tree_node
+        WHERE tree_id = #{treeId}
+    </select>
+
+    <select id="queryTreeNodeCount" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM rule_tree_node
+        WHERE tree_id = #{treeId}
+    </select>
+
+    <select id="queryTreeRulePoint" resultMap="BASE_MAP">
+        SELECT DISTINCT(rule_key), rule_desc
+        FROM rule_tree_node
+        WHERE tree_id = #{treeId}
+    </select>
+</mapper>

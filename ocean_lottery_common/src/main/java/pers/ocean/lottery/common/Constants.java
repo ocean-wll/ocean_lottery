@@ -13,7 +13,6 @@ public class Constants {
     @AllArgsConstructor
     @Getter
     public enum ResponseCode {
-
         SUCCESS("0000", "成功"),
         UN_ERROR("0001", "未知失败"),
         ILLEGAL_PARAMETER("0002", "非法参数"),
@@ -27,12 +26,71 @@ public class Constants {
     }
 
     /**
+     * 全局配置
+     */
+    public static final class Global {
+        /**
+         * 空节点值
+         */
+        public static final Long TREE_NULL_NODE = 0L;
+    }
+
+    /**
+     * 决策树节点类型
+     */
+    public static final class NodeType {
+        /**
+         * 根茎
+         */
+        public static final Integer STEM = 1;
+
+        /**
+         * 果实
+         */
+        public static final Integer FRUIT = 2;
+    }
+
+    /**
+     * 规则限定类型
+     */
+    public static final class RuleLimitType {
+        /**
+         * 等于
+         */
+        public static final int EQUAL = 1;
+
+        /**
+         * 大于
+         */
+        public static final int GT = 2;
+
+        /**
+         * 小于
+         */
+        public static final int LT = 3;
+
+        /**
+         * 大于&等于
+         */
+        public static final int GE = 4;
+
+        /**
+         * 小于&等于
+         */
+        public static final int LE = 5;
+
+        /**
+         * 枚举
+         */
+        public static final int ENUM = 6;
+    }
+
+    /**
      * 活动状态 1：编辑、2：提审、3：撤审、4：通过、5：运行(审核通过后worker扫描状态)、6：拒绝、7：关闭、8：开启
      */
     @AllArgsConstructor
     @Getter
     public enum ActivityState {
-
         /**
          * 编辑
          */
@@ -86,7 +144,6 @@ public class Constants {
     @AllArgsConstructor
     @Getter
     public enum StrategyMode {
-
         /**
          * 单项概率：如果A奖品抽空后，B和C保持目前中奖概率，用户抽奖扔有20%中为A，因A库存抽空则结果展示为未中奖。为了运营成本，通常这种情况的使用的比较多
          */
@@ -198,7 +255,7 @@ public class Constants {
         /**
          * 随机算法
          */
-        RANDOM_NUMERIC;
+        RANDOM_NUMERIC
     }
 
     /**
