@@ -49,6 +49,6 @@ dubbo:
   #    address: multicast://224.5.6.8:1234
   protocol:
     name: dubbo
-    port: 20880
+    port: 20890
   scan:
     base-packages: pers.ocean.lottery.rpc
